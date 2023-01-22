@@ -1,5 +1,5 @@
 # card-generator
-Web application that generates a bank card image/preview based on inputted information
+Node based web application that generates a bank card image/preview based on inputted information
 
 How to run:
 Clone the repository, run npm install, run node generator.js
