@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="index.css">
+
+
+</head>
+
+<body>
+	<div style="background-color: #2c3e50; padding: 2%; position: absolute; top: 3%; margin-left: 29%; width: 40%;">
+		<text class="mainText">Enter your name:</text><br><br>
+		<input type="text" id="namegenerator" name="namegenerator" class="mainInput"><br>
+		<text class="mainText">Valid end (MM/YY)</text><br>
+		<input type="text" id="validstart" name="validstart" class="mainInput"><br><br>
+		<button type="button" id="button" class="mainButton" onClick="generateCard()">Generate Card</button> <br><br><br>
+		<img class="generatedImage" id="imageGenerated"	src="" style="background-color: transparent;"></img>
+	</div>
+
+	<script>
+	function generateCard() {
+	    var xmlHttp = new XMLHttpRequest();
+		xmlHttp.onreadystatechange = function() {
+		    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+		      var response = xmlHttp.responseText;
+	  		  console.log(response);
+	   		  document.getElementById('imageGenerated').src = (response + ".png");
+		    }
+		}
+
+		var name = document.getElementById('namegenerator').value;
+		var end = document.getElementById('validstart').value;
+		var urlQuery = new URL("http://localhost:2302/sendimagerequest");
+		urlQuery.searchParams.append('name', name);
+		urlQuery.searchParams.append('end', end);
+
+	    xmlHttp.open( "GET", urlQuery, true ); // false for synchronous request
+	    xmlHttp.send( null );
+	    var response = (xmlHttp.response);
+	}
+	</script>
+</body>
+</html>
